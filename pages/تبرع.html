@@ -9,6 +9,7 @@
     <style>
         :root {
             --primary-green: #1f4e3d;
+            --ehsan-color: #00968c; /* لون منصة إحسان */
             --accent-gold: #d4af37;
             --bg-light: #fdfbf7;
             --card-bg: #ffffff;
@@ -92,7 +93,6 @@
             gap: 15px;
         }
 
-        /* زر التبرع الأساسي */
         .donate-btn {
             background: var(--primary-green);
             color: white;
@@ -109,9 +109,13 @@
         }
 
         .donate-btn:hover {
-            background: #2a634e;
             transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(31, 78, 61, 0.3);
+            opacity: 0.9;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .ehsan-btn {
+            background: var(--ehsan-color);
         }
 
         .back-link {
@@ -148,16 +152,16 @@
             <div class="heart-icon">❤</div>
             <h2>ساهم في نشر الخير</h2>
             <p>
-                هذا الموقع مشروع خيري غير ربحي. تبرعك يساعدنا على تغطية تكاليف الدومين (النطاق) والسيرفر لضمان بقاء الموقع متاحاً للجميع كصدقة جارية.
+                هذا الموقع مشروع خيري غير ربحي. يمكنك المساهمة في دعمنا أو التبرع عبر المنصات الرسمية ليكون لك أجر في كل ذكر يُقرأ.
             </p>
 
             <div class="donation-options">
-                <a href="https://www.paypal.me/YOUR_USERNAME" class="donate-btn">
-                    تبرع عبر PayPal
+                <a href="https://ehsan.sa/donation" target="_blank" class="donate-btn ehsan-btn">
+                    تبرع عبر منصة إحسان
                 </a>
                 
-                <a href="https://www.buymeacoffee.com/YOUR_USERNAME" class="donate-btn" style="background: var(--accent-gold);">
-                    دعم عبر Buy Me a Coffee
+                <a href="https://www.paypal.me/YOUR_USERNAME" target="_blank" class="donate-btn">
+                    تبرع عبر PayPal
                 </a>
             </div>
 
