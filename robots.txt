@@ -1,2 +1,3 @@
 User-agent: *
 Allow: /
+sitemap:https://adkari.uk/sitemap.xml
