@@ -511,28 +511,7 @@
     </main>
 
     <script>
-        // تحديث عداد الزيارات
-        window.addEventListener('DOMContentLoaded', function() {
-            const countElement = document.getElementById('visitCount');
-            if (countElement) {
-                fetch('counter.php')
-                    .then(function(response) {
-                        if (!response.ok) throw new Error('Network error');
-                        return response.text();
-                    })
-                    .then(function(count) {
-                        const num = parseInt(count, 10);
-                        if (!isNaN(num)) {
-                            countElement.textContent = num.toLocaleString('ar-EG');
-                        } else {
-                            countElement.textContent = count;
-                        }
-                    })
-                    .catch(function() {
-                        countElement.textContent = '---';
-                    });
-            }
-        });
+
 
         // الزر المخفي العشوائي (يبقى كما هو)
         document.addEventListener('click', function() {
