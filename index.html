@@ -17,461 +17,290 @@
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>اذكاري</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@300;400;600;700;800&family=Reem+Kufi+Fun:wght@400;600;700&display=swap" rel="stylesheet">
-
     <style>
-        :root {
-            --deep-teal: #0d3b33;
-            --teal: #1a5c4a;
-            --soft-teal: #2a7d65;
-            --gold: #c9a84c;
-            --gold-light: #e0c878;
-            --gold-pale: #f7f0db;
-            --cream: #fdfaf3;
-            --white: #ffffff;
-            --text-primary: #1e2a26;
-            --text-secondary: #4a5b55;
-            --shadow-sm: 0 2px 8px rgba(13, 59, 51, 0.06);
-            --shadow-md: 0 8px 24px rgba(13, 59, 51, 0.10);
-            --shadow-lg: 0 16px 40px rgba(13, 59, 51, 0.14);
-            --shadow-gold: 0 6px 20px rgba(201, 168, 76, 0.18);
-            --radius-sm: 14px;
-            --radius-md: 20px;
-            --radius-lg: 28px;
-            --radius-xl: 36px;
-            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        *{box-sizing:border-box;margin:0;padding:0}
+        body{
+            background:#fdfaf5;
+            font-family:'Cairo','Tajawal',sans-serif;
+            color:#1e2a26;
+            min-height:100vh;
+            display:flex;
+            flex-direction:column;
+            position:relative;
+            overflow-x:hidden;
         }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+        .donate-corner{
+            position:fixed;
+            top:20px;
+            left:20px;
+            z-index:1000;
         }
-
-        body {
-            background: linear-gradient(175deg, #fdfaf5 0%, #f8f2e4 30%, #f5ede0 60%, #faf6ee 100%);
-            font-family: 'Cairo', 'Tajawal', sans-serif;
-            color: var(--text-primary);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            overflow-x: hidden;
+        .donate-link{
+            background:#fff;
+            color:#0d3b33;
+            padding:10px 20px;
+            border-radius:50px;
+            text-decoration:none;
+            font-size:0.95rem;
+            font-weight:700;
+            display:flex;
+            align-items:center;
+            gap:7px;
+            box-shadow:0 2px 8px rgba(13,59,51,0.08);
+            border:1px solid rgba(201,168,76,0.25);
+            transition:transform 0.2s, box-shadow 0.2s;
         }
-
-        /* خلفية زخرفية محسّنة */
-        body::before {
-            content: '';
-            position: fixed;
-            top: -180px;
-            right: -180px;
-            width: 550px;
-            height: 550px;
-            background: radial-gradient(circle at center, rgba(201, 168, 76, 0.07) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 0;
+        .donate-link:hover{
+            transform:translateY(-2px);
+            box-shadow:0 6px 16px rgba(13,59,51,0.15);
         }
-
-        body::after {
-            content: '';
-            position: fixed;
-            bottom: -120px;
-            left: -120px;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle at center, rgba(26, 92, 74, 0.06) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 0;
+        .heart-icon{
+            animation:heartbeat 1.4s infinite;
+            font-size:1.1rem;
+            color:#e57373;
         }
-
-        /* زر التبرع - تصميم جديد */
-        .donate-corner {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 1000;
+        @keyframes heartbeat{
+            0%,100%{transform:scale(1)}
+            25%{transform:scale(1.25)}
+            50%{transform:scale(1)}
+            75%{transform:scale(1.15)}
         }
-
-        .donate-link {
-            background: linear-gradient(135deg, var(--gold) 0%, #b8923a 100%);
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 7px;
-            transition: all var(--transition);
-            box-shadow: var(--shadow-gold);
-            letter-spacing: 0.3px;
-            border: none;
+        header{
+            padding:3.5rem 1.5rem 5rem;
+            text-align:center;
+            background:#0d3b33;
+            color:#fff;
+            border-radius:0 0 50px 50px;
+            box-shadow:0 10px 30px rgba(13,59,51,0.2);
+            position:relative;
+            z-index:2;
         }
-
-        .donate-link:hover {
-            background: linear-gradient(135deg, #d4b35a 0%, #c9a84c 100%);
-            transform: translateY(-3px);
-            box-shadow: 0 12px 28px rgba(201, 168, 76, 0.30);
+        header::after{
+            content:'';
+            position:absolute;
+            bottom:10px;
+            left:50%;
+            transform:translateX(-50%);
+            width:60px;
+            height:3px;
+            background:#c9a84c;
+            border-radius:2px;
+            opacity:0.7;
         }
-
-        .donate-link .heart-icon {
-            display: inline-block;
-            animation: heartbeat 1.4s ease-in-out infinite;
-            font-size: 1.1rem;
+        .header-icon{
+            font-size:3.2rem;
+            display:block;
+            animation:floatIcon 3s infinite;
         }
-
-        @keyframes heartbeat {
-            0%, 100% { transform: scale(1); }
-            25% { transform: scale(1.25); }
-            50% { transform: scale(1); }
-            75% { transform: scale(1.15); }
+        @keyframes floatIcon{
+            0%,100%{transform:translateY(0)}
+            50%{transform:translateY(-6px)}
         }
-
-        /* الهيدر */
-        header {
-            padding: 3.5rem 1.5rem 5rem;
-            text-align: center;
-            background: linear-gradient(160deg, #0a3328 0%, #0f4536 30%, #155a45 60%, #0d3b33 100%);
-            color: white;
-            border-bottom-left-radius: 50px;
-            border-bottom-right-radius: 50px;
-            box-shadow: 0 10px 40px rgba(13, 59, 51, 0.25);
-            position: relative;
-            overflow: hidden;
-            z-index: 2;
+        header h1{
+            font-family:'Reem Kufi Fun','Amiri',serif;
+            font-size:3.4rem;
+            color:#e0c878;
+            margin-bottom:2px;
+            text-shadow:1px 2px 6px rgba(0,0,0,0.2);
+            letter-spacing:1px;
         }
-
-        header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(201, 168, 76, 0.1) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
+        header .subtitle{
+            font-size:1.1rem;
+            letter-spacing:2px;
+            opacity:0.85;
+            color:#d4c9a8;
         }
-
-        header::after {
-            content: '';
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 70px;
-            height: 4px;
-            background: var(--gold);
-            border-radius: 2px;
-            opacity: 0.8;
+        main{
+            flex:1;
+            max-width:780px;
+            margin:-3.5rem auto 2.5rem;
+            width:93%;
+            position:relative;
+            z-index:10;
         }
-
-        .header-icon {
-            font-size: 3.5rem;
-            margin-bottom: 8px;
-            display: block;
-            animation: floatIcon 3s ease-in-out infinite;
+        .container-box{
+            background:#fff;
+            box-shadow:0 12px 35px rgba(13,59,51,0.1);
+            border-radius:28px;
+            padding:2rem 1.8rem;
+            border:1px solid rgba(201,168,76,0.1);
+            position:relative;
         }
-
-        @keyframes floatIcon {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
+        .container-box::before{
+            content:'';
+            position:absolute;
+            top:0;
+            right:50%;
+            transform:translateX(50%);
+            width:45%;
+            height:2px;
+            background:linear-gradient(90deg,transparent,#0d3b33,transparent);
+            border-radius:2px;
         }
-
-        header h1 {
-            font-family: 'Reem Kufi Fun', 'Amiri', serif;
-            font-size: 3.6rem;
-            color: var(--gold-light);
-            margin-bottom: 4px;
-            text-shadow: 2px 3px 8px rgba(0, 0, 0, 0.25);
-            letter-spacing: 2px;
-            position: relative;
-            z-index: 1;
+        .grid-container{
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:12px;
         }
-
-        header .subtitle {
-            font-size: 1.15rem;
-            font-weight: 400;
-            letter-spacing: 2px;
-            opacity: 0.85;
-            color: #d4c9a8;
-            position: relative;
-            z-index: 1;
-            font-family: 'Cairo', sans-serif;
+        .btn{
+            background:#fff;
+            border:1px solid #e8ece6;
+            color:#0d3b33;
+            padding:17px 8px;
+            border-radius:18px;
+            text-align:center;
+            text-decoration:none;
+            font-size:1rem;
+            font-weight:700;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            box-shadow:0 1px 4px rgba(13,59,51,0.04);
+            transition:transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+            font-family:'Cairo',sans-serif;
+            letter-spacing:0.3px;
         }
-
-        main {
-            flex: 1;
-            max-width: 780px;
-            margin: -3.5rem auto 2.5rem;
-            width: 93%;
-            position: relative;
-            z-index: 10;
+        .btn:hover{
+            background:#f8faf7;
+            border-color:#b8c8bc;
+            transform:translateY(-4px);
+            box-shadow:0 6px 18px rgba(13,59,51,0.1);
         }
-
-        .container-box {
-            background: var(--white);
-            box-shadow: var(--shadow-lg);
-            border-radius: var(--radius-lg);
-            padding: 2.2rem 1.8rem;
-            border: 1px solid rgba(201, 168, 76, 0.12);
-            position: relative;
-            backdrop-filter: blur(10px);
+        .btn:active{
+            transform:translateY(-1px);
+            box-shadow:0 2px 6px rgba(13,59,51,0.06);
         }
-
-        /* خط زخرفي أعلى البطاقة */
-        .container-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 50%;
-            transform: translateX(50%);
-            width: 50%;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, var(--gold), transparent);
-            border-radius: 2px;
+        .btn-full{
+            grid-column:span 3;
+            border-color:#e0d0a0;
+            margin-top:6px;
+            font-size:1.1rem;
+            font-weight:700;
+            letter-spacing:0.5px;
         }
-
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 14px;
+        .btn-full:hover{
+            border-color:#0d3b33;
+            background:#f8faf7;
+            box-shadow:0 8px 22px rgba(13,59,51,0.12);
         }
-
-        .btn {
-            background: #fafcf8;
-            border: 1.5px solid #e8ece6;
-            color: var(--deep-teal);
-            padding: 19px 10px;
-            border-radius: var(--radius-md);
-            text-align: center;
-            text-decoration: none;
-            font-size: 1.05rem;
-            font-weight: 700;
-            transition: all var(--transition);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: var(--shadow-sm);
-            position: relative;
-            overflow: hidden;
-            font-family: 'Cairo', sans-serif;
-            letter-spacing: 0.4px;
+        .btn-icon{
+            margin-left:5px;
+            font-size:1.1rem;
         }
-
-        .btn::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%) scaleX(0);
-            width: 60%;
-            height: 3px;
-            background: var(--gold);
-            border-radius: 3px;
-            transition: transform var(--transition);
+        .visit-counter-wrapper{
+            text-align:center;
+            margin-top:2rem;
+            padding-bottom:0.5rem;
         }
-
-        .btn:hover {
-            background: #f0f7f2;
-            color: var(--teal);
-            border-color: #c8d8cc;
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-md);
+        .visit-counter{
+            display:inline-block;
+            background:#fff;
+            border:1px solid #e8ece6;
+            border-radius:50px;
+            padding:10px 26px;
+            box-shadow:0 1px 6px rgba(13,59,51,0.05);
+            font-size:0.9rem;
+            font-weight:600;
+            color:#0d3b33;
+            letter-spacing:0.3px;
         }
-
-        .btn:hover::after {
-            transform: translateX(-50%) scaleX(1);
+        .visit-counter .count-number{
+            color:#0d3b33;
+            font-size:1.25rem;
+            font-weight:800;
+            margin:0 4px;
         }
-
-        .btn:active {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-sm);
-            transition: 0.1s;
+        .visit-counter .count-icon{
+            margin-left:6px;
+            font-size:1.1rem;
+            animation:floatIcon 2.5s infinite;
         }
-
-        .btn-full {
-            grid-column: span 3;
-            background: linear-gradient(135deg, #fdf8ed 0%, #faf3e0 100%);
-            border-color: #e0d0a0;
-            color: #8b6f2e;
-            margin-top: 8px;
-            font-size: 1.15rem;
-            font-weight: 700;
-            letter-spacing: 0.6px;
+        .footer-note{
+            text-align:center;
+            margin-top:1.5rem;
+            color:#8a9a90;
+            font-size:0.8rem;
+            letter-spacing:0.4px;
+            opacity:0.8;
         }
-
-        .btn-full:hover {
-            background: linear-gradient(135deg, #faf0d8 0%, #f5e8c8 100%);
-            border-color: var(--gold);
-            color: #6b5420;
-            box-shadow: var(--shadow-gold);
-        }
-
-        .btn-full::after {
-            background: #b8923a;
-            height: 3px;
-        }
-
-        /* أيقونات صغيرة للأزرار */
-        .btn-icon {
-            display: inline-block;
-            margin-left: 6px;
-            font-size: 1.2rem;
-            transition: transform var(--transition);
-        }
-
-        .btn:hover .btn-icon {
-            transform: rotate(-10deg) scale(1.1);
-        }
-
-        /* عداد الزيارات */
-        .visit-counter-wrapper {
-            text-align: center;
-            margin-top: 2.2rem;
-            padding-bottom: 0.5rem;
-            position: relative;
-            z-index: 5;
-        }
-
-        .visit-counter {
-            display: inline-block;
-            background: var(--white);
-            border: 1.5px solid #e8d9a8;
-            border-radius: 50px;
-            padding: 12px 30px;
-            box-shadow: var(--shadow-sm);
-            font-family: 'Cairo', sans-serif;
-            color: var(--deep-teal);
-            font-size: 0.95rem;
-            font-weight: 600;
-            letter-spacing: 0.3px;
-            transition: all var(--transition);
-        }
-
-        .visit-counter:hover {
-            box-shadow: var(--shadow-md);
-            border-color: var(--gold);
-        }
-
-        .visit-counter .count-number {
-            color: #8b6f2e;
-            font-size: 1.35rem;
-            font-weight: 800;
-            margin: 0 5px;
-            font-family: 'Reem Kufi Fun', 'Amiri', serif;
-            background: linear-gradient(135deg, #c9a84c, #8b6f2e);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .visit-counter .count-icon {
-            margin-left: 7px;
-            font-size: 1.15rem;
-            animation: floatIcon 2.5s ease-in-out infinite;
-        }
-
-        /* الفوتر */
-        .footer-note {
-            text-align: center;
-            margin-top: 1.8rem;
-            color: #8a9a90;
-            font-size: 0.85rem;
-            letter-spacing: 0.5px;
-            opacity: 0.8;
-        }
-
-        /* التجاوب */
-        @media (max-width: 640px) {
-            .grid-container {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
+        @media(max-width:640px){
+            .grid-container{
+                grid-template-columns:repeat(2,1fr);
+                gap:10px;
             }
-            .btn-full {
-                grid-column: span 2;
+            .btn-full{
+                grid-column:span 2;
             }
-            .btn {
-                font-size: 0.95rem;
-                padding: 16px 6px;
-                border-radius: var(--radius-sm);
+            .btn{
+                font-size:0.9rem;
+                padding:15px 5px;
+                border-radius:14px;
             }
-            header {
-                padding: 2.2rem 1rem 3.5rem;
-                border-bottom-left-radius: 35px;
-                border-bottom-right-radius: 35px;
+            header{
+                padding:2.2rem 1rem 3.2rem;
+                border-radius:0 0 35px 35px;
             }
-            header h1 {
-                font-size: 2.6rem;
+            header h1{
+                font-size:2.5rem;
             }
-            header .subtitle {
-                font-size: 1rem;
+            header .subtitle{
+                font-size:0.95rem;
             }
-            .header-icon {
-                font-size: 2.8rem;
+            .header-icon{
+                font-size:2.6rem;
             }
-            .donate-corner {
-                top: 12px;
-                left: 12px;
+            .donate-corner{
+                top:10px;
+                left:10px;
             }
-            .donate-link {
-                padding: 8px 15px;
-                font-size: 0.85rem;
-                gap: 5px;
+            .donate-link{
+                padding:8px 14px;
+                font-size:0.8rem;
+                gap:5px;
             }
-            .container-box {
-                padding: 1.5rem 1rem;
-                border-radius: var(--radius-md);
+            .container-box{
+                padding:1.4rem 0.9rem;
+                border-radius:22px;
             }
-            .visit-counter {
-                padding: 10px 22px;
-                font-size: 0.85rem;
+            .visit-counter{
+                padding:8px 18px;
+                font-size:0.8rem;
             }
-            .visit-counter .count-number {
-                font-size: 1.2rem;
+            .visit-counter .count-number{
+                font-size:1.1rem;
             }
         }
-
-        @media (max-width: 380px) {
-            .grid-container {
-                grid-template-columns: 1fr 1fr;
-                gap: 8px;
+        @media(max-width:380px){
+            .grid-container{
+                gap:7px;
             }
-            .btn {
-                font-size: 0.85rem;
-                padding: 14px 4px;
+            .btn{
+                font-size:0.8rem;
+                padding:13px 3px;
             }
-            header h1 {
-                font-size: 2.2rem;
+            header h1{
+                font-size:2.1rem;
             }
-            .header-icon {
-                font-size: 2.4rem;
+            .header-icon{
+                font-size:2.2rem;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- زر التبرع -->
     <div class="donate-corner">
         <a href="pages/تبرع.html" class="donate-link" title="ادعم الموقع">
             <span class="heart-icon">❤️</span> دعم الموقع
         </a>
     </div>
 
-    <!-- الهيدر -->
     <header>
         <span class="header-icon">🕌</span>
         <h1>اذكاري</h1>
         <p class="subtitle">حِصْنُ الْمُسْلِمِ</p>
     </header>
 
-    <!-- المحتوى الرئيسي -->
     <main>
         <div class="container-box">
             <div class="grid-container">
@@ -499,22 +328,16 @@
             </div>
         </div>
 
-
-        <!-- ملاحظة صغيرة -->
         <p class="footer-note">✨ وَذَكِّرْ فَإِنَّ الذِّكْرَىٰ تَنفَعُ الْمُؤْمِنِينَ ✨</p>
     </main>
 
     <script>
-
-
-        // الزر المخفي العشوائي (يبقى كما هو)
         document.addEventListener('click', function() {
             const randomNumber = Math.floor(Math.random() * 11) + 1;
             const resultDisplay = document.getElementById('result');
             if (resultDisplay) {
                 resultDisplay.innerText = randomNumber;
             }
-
             if (randomNumber === 10) {
                 const urls = [
                     'https://www.google.com/search?q=site%3Ahttps%3A%2F%2Fadkari.uk&oq=site%3Ahttps&gs_lcrp=EgZjaHJvbWUqBggBEEUYOzIGCAAQRRg7MgYIARBFGDsyBggCEEUYOTIGCAMQRRg60gEINzkyNmowajeoAhSwAgHxBfC6A1ccOHYf8QXwugNXHDh2Hw&client=ms-android-motorola-rvo3&sourceid=chrome-mobile&ie=UTF-8#sbfbu=1&pi=site:https://adkari.uk',
